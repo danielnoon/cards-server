@@ -169,8 +169,6 @@ ws.addListener("connection", (client) => {
 
         const hand = games.get(game.id).getHand(id);
 
-        console.log(hand.map((c) => c.id));
-
         client.send(JSON.stringify({ type: "draw_card", hand }));
       } else {
         console.log(
@@ -187,9 +185,9 @@ ws.addListener("connection", (client) => {
     console.log(`client ${id} disconnected`);
     if (players.get(id)) {
       const gameId = players.get(id);
+      const game = games.get(gameId);
 
-      if (gameId) {
-        const game = games.get(gameId);
+      if (gameId && game) {
         const opponentId = game.getOpponent(id).id;
         const opponentClient = clients.get(opponentId);
         opponentClient.send(JSON.stringify({ type: "opponent_disconnected" }));
