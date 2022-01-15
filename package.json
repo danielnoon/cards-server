@@ -1,0 +1,19 @@
+{
+  "name": "cards-server",
+  "version": "1.0.0",
+  "description": "Communication server for cards",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs"
+  },
+  "keywords": [],
+  "author": "Daniel Noon",
+  "license": "MIT",
+  "dependencies": {
+    "immer": "^9.0.12",
+    "nodemon": "^2.0.15",
+    "ws": "^8.4.2"
+  }
+}
