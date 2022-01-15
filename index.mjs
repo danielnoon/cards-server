@@ -187,17 +187,15 @@ ws.addListener("connection", (client) => {
     console.log(`client ${id} disconnected`);
     if (players.get(id)) {
       const gameId = players.get(id);
-      const game = games.get(gameId);
 
-      if (game.turn === id) {
+      if (gameId) {
+        const game = games.get(gameId);
         const opponentId = game.getOpponent(id).id;
         const opponentClient = clients.get(opponentId);
-
         opponentClient.send(JSON.stringify({ type: "opponent_disconnected" }));
+        games.delete(gameId);
       }
-
       players.delete(id);
-      games.delete(gameId);
     }
   });
 });
