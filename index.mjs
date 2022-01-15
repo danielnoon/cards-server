@@ -8,7 +8,7 @@ const produce = immer.default;
 enableAllPlugins();
 
 const ws = new WebSocketServer({
-  port: 3000,
+  port: process.env.PORT || 3000,
 });
 
 let currentClientId = 0;
