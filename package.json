@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "immer": "^9.0.12",
+    "itertools": "^1.7.1",
     "nodemon": "^2.0.15",
     "ws": "^8.4.2"
   }

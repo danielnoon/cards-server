@@ -1,5 +1,5 @@
 import { immerable } from "immer";
-import { GECK, GRIZZLY, SQUIRREL, STOAT, WOLF } from "./cards.mjs";
+import { getDeck } from "./deck-pool.mjs";
 
 export class CardState {
   constructor(id, card) {
@@ -7,9 +7,8 @@ export class CardState {
     this.data = card;
 
     this.damage = 0;
+    this.slot = 0;
   }
-
-  slot = 0;
 
   get blood() {
     return 1;
@@ -42,20 +41,8 @@ export class GameState {
       [player1]: [null, null, null, null],
       [player2]: [null, null, null, null],
     };
-    this[player1] = new PlayerState(player1, [
-      SQUIRREL,
-      STOAT,
-      WOLF,
-      GECK,
-      GRIZZLY,
-    ]);
-    this[player2] = new PlayerState(player2, [
-      SQUIRREL,
-      STOAT,
-      WOLF,
-      GECK,
-      GRIZZLY,
-    ]);
+    this[player1] = new PlayerState(player1, getDeck());
+    this[player2] = new PlayerState(player2, getDeck());
     this.opponents = new Map([
       [player1, this[player2]],
       [player2, this[player1]],
