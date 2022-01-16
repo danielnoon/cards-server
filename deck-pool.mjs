@@ -14,7 +14,7 @@ import {
 const DECK_SIZE = 20;
 
 const DECK_POOL = [
-  ...repeat(SQUIRREL, 3),
+  ...repeat(SQUIRREL, 6),
   ...repeat(WOLF, 4),
   ...repeat(STOAT, 4),
   ...repeat(GRIZZLY, 2),
@@ -27,7 +27,7 @@ const DECK_POOL = [
 
 export function getDeck() {
   const pool = [...DECK_POOL];
-  const deck = [...repeat(SQUIRREL, 5)];
+  const deck = [SQUIRREL, MANTIS, MANTIS_GOD];
 
   for (let i = 0; i < DECK_SIZE; i++) {
     const card = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];

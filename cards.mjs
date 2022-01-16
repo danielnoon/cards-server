@@ -65,7 +65,7 @@ export const ADDER = {
   health: 1,
   cost: 2,
   cost_type: "blood",
-  sigils: ["death_touch"],
+  sigils: ["touch_of_death"],
 };
 
 export const MANTIS = {
