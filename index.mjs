@@ -118,7 +118,9 @@ ws.addListener("connection", (client) => {
             });
           } else {
             const phase =
-              games.get(game.id)[id].hand.length === 0 ? "play" : "draw";
+              games.get(game.id)[opponentId].deck.length === 0
+                ? "play"
+                : "draw";
 
             updateGame(game.id, (draft) => {
               draft.phase = phase;
