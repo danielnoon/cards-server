@@ -42,6 +42,14 @@ export function verifyTurn(state, playerId, actions) {
           }
         }
 
+        // check if there are repeated cards in the sacrifices
+        const repeatedSacrifices = new Set(sacrifices || []);
+        if (repeatedSacrifices.size !== sacrifices.length) {
+          console.error(`there are repeated cards in sacrifices`);
+          draft.valid = false;
+          return;
+        }
+
         // check if card's cost is met
         const card = draft.cards.get(id);
         const cost = card.data.cost;
@@ -49,13 +57,15 @@ export function verifyTurn(state, playerId, actions) {
         if (card.data.cost_type === "blood") {
           const sacBlood = sacrifices.reduce((acc, sacrifice) => {
             const id = draft.play[playerId][sacrifice];
-            if (id !== null && draft.cards.has(id)) {
-              const blood = draft.cards.get(
-                draft.play[playerId][sacrifice]
-              ).blood;
 
-              draft[playerId].bones += 1;
-              draft.play[playerId][sacrifice] = null;
+            if (id !== null && draft.cards.has(id)) {
+              const card = draft.cards.get(id);
+              const blood = card.blood;
+
+              if (!card.data.sigils.includes("many_lives")) {
+                draft[playerId].bones += 1;
+                draft.play[playerId][sacrifice] = null;
+              }
 
               return acc + blood;
             } else {

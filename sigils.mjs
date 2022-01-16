@@ -21,6 +21,7 @@ const BifurcatedStrike = {
 
         if (opponentCardState.damage >= opponentCardState.data.health) {
           game.play[opponent.id][target] = null;
+          opponent.bones += 1;
         }
       } else {
         opponent.damage += card.attack;
@@ -37,7 +38,7 @@ const Trifurcated = {
   onAttack: (game, playerId, cardId) => {
     const card = game.cards.get(cardId);
     const opponent = game.getOpponent(playerId);
-    const targets = [card.slot + 1, card.slot - 1].filter(
+    const targets = [card.slot + 1, card.slot, card.slot - 1].filter(
       (slot) => slot >= 0 && slot < 4
     );
 
@@ -49,6 +50,7 @@ const Trifurcated = {
         opponentCardState.damage += card.data.attack;
 
         if (opponentCardState.damage >= opponentCardState.data.health) {
+          opponent.bones += 1;
           game.play[opponent.id][target] = null;
         }
       } else {
@@ -59,3 +61,16 @@ const Trifurcated = {
 };
 
 sigils.set(Trifurcated.id, Trifurcated);
+
+const Airborne = {
+  id: "airborne",
+  name: "Airborne",
+  onAttack: (game, playerId, cardId) => {
+    const card = game.cards.get(cardId);
+    const opponent = game.getOpponent(playerId);
+
+    opponent.damage += card.data.attack;
+  },
+};
+
+sigils.set(Airborne.id, Airborne);

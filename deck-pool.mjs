@@ -9,12 +9,13 @@ import {
   SQUIRREL,
   STOAT,
   WOLF,
+  CAT,
 } from "./cards.mjs";
 
 const DECK_SIZE = 20;
 
 const DECK_POOL = [
-  ...repeat(SQUIRREL, 6),
+  ...repeat(SQUIRREL, 8),
   ...repeat(WOLF, 4),
   ...repeat(STOAT, 4),
   ...repeat(GRIZZLY, 2),
@@ -23,13 +24,14 @@ const DECK_POOL = [
   ...repeat(RAVEN, 2),
   ...repeat(MANTIS, 3),
   ...repeat(MANTIS_GOD, 2),
+  ...repeat(CAT, 2),
 ];
 
 export function getDeck() {
   const pool = [...DECK_POOL];
-  const deck = [SQUIRREL, MANTIS, MANTIS_GOD];
+  const deck = [SQUIRREL];
 
-  for (let i = 0; i < DECK_SIZE; i++) {
+  for (let i = 0; i < DECK_SIZE - deck.length; i++) {
     const card = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
     deck.push(card);
   }

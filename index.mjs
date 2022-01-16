@@ -3,6 +3,7 @@ import immer, { enableAllPlugins } from "immer";
 import { drawCard, GameState } from "./gameState.mjs";
 import { verifyTurn } from "./verifyTurn.mjs";
 import { fight } from "./fight.mjs";
+import { getSyncData } from "./getSyncData.mjs";
 
 const produce = immer.default;
 enableAllPlugins();
@@ -140,6 +141,13 @@ ws.addListener("connection", (client) => {
           JSON.stringify({ type: "error", message: "not your turn" })
         );
       }
+
+      client.send(
+        JSON.stringify({
+          type: "sync",
+          data: getSyncData(games.get(players.get(id)), id),
+        })
+      );
     }
 
     if (data.type === "draw_card") {
@@ -178,6 +186,13 @@ ws.addListener("connection", (client) => {
           JSON.stringify({ type: "error", message: "not your turn" })
         );
       }
+
+      client.send(
+        JSON.stringify({
+          type: "sync",
+          data: getSyncData(games.get(players.get(id)), id),
+        })
+      );
     }
   });
 
