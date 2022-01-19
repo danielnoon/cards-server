@@ -10,6 +10,7 @@ import {
   STOAT,
   WOLF,
   CAT,
+  COYOTE,
 } from "./cards.mjs";
 
 const DECK_SIZE = 20;
@@ -29,7 +30,7 @@ const DECK_POOL = [
 
 export function getDeck() {
   const pool = [...DECK_POOL];
-  const deck = [SQUIRREL];
+  const deck = [SQUIRREL, COYOTE];
 
   for (let i = 0; i < DECK_SIZE - deck.length; i++) {
     const card = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];

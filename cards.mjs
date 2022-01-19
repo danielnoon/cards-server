@@ -127,3 +127,13 @@ export const CAT = {
   cost_type: "blood",
   sigils: ["many_lives"],
 };
+
+export const COYOTE = {
+  id: 13,
+  name: "Coyote",
+  attack: 2,
+  health: 1,
+  cost: 4,
+  cost_type: "bones",
+  sigils: [],
+};

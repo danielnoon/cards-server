@@ -200,17 +200,26 @@ ws.addListener("connection", (client) => {
 
   client.addListener("close", () => {
     console.log(`client ${id} disconnected`);
+
     if (players.get(id)) {
       const gameId = players.get(id);
       const game = games.get(gameId);
 
-      if (gameId && game) {
+      if (game) {
         const opponentId = game.getOpponent(id).id;
         const opponentClient = clients.get(opponentId);
         opponentClient.send(JSON.stringify({ type: "opponent_disconnected" }));
         games.delete(gameId);
+        games.delete(opponentId);
       }
+
       players.delete(id);
     }
+
+    if (waiting.includes(id)) {
+      waiting.splice(waiting.indexOf(id), 1);
+    }
+    
+    clients.delete(id);
   });
 });
