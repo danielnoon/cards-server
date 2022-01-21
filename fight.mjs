@@ -29,6 +29,7 @@ export function fight(game, playerId) {
           opponentCardState.damage += cardState.attack;
           if (opponentCardState.damage >= opponentCardState.data.health) {
             draft.play[opponent.id][cardState.slot] = null;
+            opponent.bones += 1;
           }
         }
       }

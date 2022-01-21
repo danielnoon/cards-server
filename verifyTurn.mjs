@@ -83,11 +83,13 @@ export function verifyTurn(state, playerId, actions) {
         } else if (card.data.cost_type === "bones") {
           if (draft[playerId].bones < cost) {
             console.error(
-              `${id} requires ${cost} bones, but  player only has ${draft[playerId].bones}`
+              `${id} requires ${cost} bones, but player only has ${draft[playerId].bones}`
             );
             draft.valid = false;
             return;
           }
+
+          draft[playerId].bones -= cost;
         }
 
         // check if there is empty space
